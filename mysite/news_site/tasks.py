@@ -14,11 +14,8 @@ import beat
 @celery_app.on_after_finalize.connect
 def setup_periodic_tasks(sender, **kwargs):
     print('lol')
-    # Calls test() every 10 seconds.
-    sender.add_periodic_task(crontab(
-        hour=7, minute=30, day_of_week=1),
-        test.s()
-    )
+    # Calls test() every 6 seconds.
+    sender.add_periodic_task(10.0, test.s(), name='add-every-10-seconds')
 
 
 @celery_app.task

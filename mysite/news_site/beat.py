@@ -1,7 +1,7 @@
-from celery import Celery
+'''from celery import Celery
 
 
-'''app = Celery('mysite')
+app = Celery('mysite')
 
 app.conf.beat_schedule = {
     'add-every-30-seconds': {
