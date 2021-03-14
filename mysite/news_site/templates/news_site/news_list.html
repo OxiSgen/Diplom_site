@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block content %}
 <h1>News</h1>
 
 {% if object_list %}
@@ -15,3 +16,4 @@
 {% else %}
   <p>There are no news.</p>
 {% endif %}
+{% endblock %}
