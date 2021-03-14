@@ -1,0 +1,15 @@
+<h1>News</h1>
+
+{% if object_list %}
+<ul>
+
+  {% for news in object_list %}
+  <li>
+    <a href="{{ author.get_absolute_url }}"> <a href="{{ news.news_url }}">{{ news.news_text }}</a>   </a>
+  </li>
+  {% endfor %}
+
+</ul>
+{% else %}
+  <p>There are no news.</p>
+{% endif %}
