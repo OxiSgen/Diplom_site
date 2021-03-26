@@ -4,14 +4,17 @@ from django.shortcuts import render
 from django.views import generic
 
 from .modules.Paeser import main as Pars
-from .forms import ContactForm
+from .modules.ria_news_parser import main
 from django.http import JsonResponse
 import schedule
 import time
 from .models import News
+from django import forms
+
+from django.utils import timezone
 
 
-class news1(generic.ListView):
+class News1(generic.ListView):
     """news = Pars()
     for n in news:
         s = News(news_text=n[1], news_url=n[0], news_hype_rate=n[2])
@@ -27,39 +30,51 @@ class news1(generic.ListView):
         return News.objects.filter(news_hype_rate__lte=5)
 
 
-class news2(generic.ListView):
+class News2(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.filter(news_hype_rate__range=(6, 20))
 
 
-class news3(generic.ListView):
+class News3(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.filter(news_hype_rate__range=(21, 100))
 
-class news4(generic.ListView):
+
+class News4(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.filter(news_hype_rate__range=(101, 200))
 
-class news5(generic.ListView):
+
+class News5(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.filter(news_hype_rate__range=(201, 1000))
 
-class news6(generic.ListView):
+
+class News6(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.filter(news_hype_rate__gt=1000)
 
-class news7(generic.ListView):
+
+class News7(generic.ListView):
     news = News
 
     def get_queryset(self):
         return News.objects.all()
+
+
+class NewsIndividual(generic.ListView):
+    template_name = 'news_site/individual.html'
+    news = News
+
+    def get_queryset(self):
+        pass

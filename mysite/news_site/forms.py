@@ -1,8 +1,9 @@
-from django import forms
-from .modules.Paeser import main as Pars
-from .models import News
+'''from django import forms
 
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = News
-        exclude = ["timestamp", ]
+
+class NewsIndividual(forms.Form):
+    renewal_date = forms.DateField(help_text="Enter a date between now and 4 weeks (default 3).")
+
+    def clean_renewal_date(self):
+        data = self.cleaned_data['renewal_date']
+        return data'''
