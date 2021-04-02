@@ -1,18 +1,13 @@
-# Create your views here.
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from .modules.Paeser import main as Pars
-from .modules.ria_news_parser import main
-from django.http import JsonResponse
-import schedule
-import time
 from .models import News
-from django import forms
 
-from django.utils import timezone
+from .charts import DemoChart
 
+import pickle
+
+user_interest = []
 
 class News1(generic.ListView):
     """news = Pars()
@@ -26,55 +21,106 @@ class News1(generic.ListView):
     return render(request, 'base.html') """
     # news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__lte=5)
+    def get(self, request):
+        num_visits1 = request.session.get('num_visits1', 0)
+        request.session['num_visits1'] = num_visits1 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__lte=5)},
+        )
 
 
 class News2(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__range=(6, 20))
+    def get(self, request):
+        num_visits2 = request.session.get('num_visits2', 0)
+        request.session['num_visits2'] = num_visits2 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__range=(6, 20))},
+        )
 
 
 class News3(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__range=(21, 100))
+    def get(self, request):
+        num_visits3 = request.session.get('num_visits3', 0)
+        request.session['num_visits3'] = num_visits3 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__range=(21, 100))},
+        )
 
 
 class News4(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__range=(101, 200))
+    def get(self, request):
+        num_visits4 = request.session.get('num_visits4', 0)
+        request.session['num_visits4'] = num_visits4 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__range=(101, 200))},
+        )
 
 
 class News5(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__range=(201, 1000))
+    def get(self, request):
+        num_visits5 = request.session.get('num_visits5', 0)
+        request.session['num_visits5'] = num_visits5 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__range=(201, 1000))},
+        )
 
 
 class News6(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.filter(news_hype_rate__gt=1000)
+    def get(self, request):
+        num_visits6 = request.session.get('num_visits6', 0)
+        request.session['num_visits6'] = num_visits6 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__gt=1000)},
+        )
 
 
 class News7(generic.ListView):
     news = News
 
-    def get_queryset(self):
-        return News.objects.all()
+    def get(self, request):
+        num_visits7 = request.session.get('num_visits7', 0)
+        request.session['num_visits7'] = num_visits7 + 1
+        return render(
+            request,
+            'news_site/news_list.html',
+            {'object_list': News.objects.filter(news_hype_rate__gt=500)},
+        )
 
 
-class NewsIndividual(generic.ListView):
+class NewsIndividual(generic.TemplateView):
     template_name = 'news_site/individual.html'
-    news = News
 
-    def get_queryset(self):
-        pass
+    def get_context_data(self, **kwargs):
+        # context = super().get_context_data(**kwargs)
+        num_visits8 = self.request.session.get('num_visits8', 0)
+        self.request.session['num_visits8'] = num_visits8 + 1
+
+        # self.request.session.flush()
+
+        context = {
+                      'chart': DemoChart(queryset=list(self.request.session.items())),
+                      'num_visits': self.request.session.items(),  # num_visits appended
+        }
+        return context
