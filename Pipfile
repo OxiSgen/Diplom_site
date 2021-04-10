@@ -12,6 +12,7 @@ schedule = "*"
 lxml = "*"
 beat = "*"
 django-charting = "*"
+feedparser = "*"
 
 [dev-packages]
 
