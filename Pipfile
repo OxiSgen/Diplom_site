@@ -13,6 +13,7 @@ lxml = "*"
 beat = "*"
 django-charting = "*"
 feedparser = "*"
+requests = "*"
 
 [dev-packages]
 

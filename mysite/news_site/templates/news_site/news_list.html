@@ -7,8 +7,8 @@
   <table width="100%" cellspacing="0" cellpadding="5">
   {% for news_L, news_R in object_list %}
   <tr>
-    <td width="50%" valign="top"> <a href="{{ news_L.news_url }}">{{ news_L.news_text }}</a> ( {{ news_L.news_hype_rate }} ) </td>
-    <td valign="top"> <a href="{{ news_R.news_url }}">{{ news_R.news_text }}</a> ( {{ news_R.news_hype_rate }} ) </td>
+    <td width="50%" valign="top"> <a href="{{ news_L.news_url }}">{{ news_L.news_text }}</a> ( {{ news_L.news_hype_rate }} )  ( {{ news_L.id }} )</td>
+    <td valign="top"> <a href="{{ news_R.news_url }}">{{ news_R.news_text }}</a> ( {{ news_R.news_hype_rate }} ) ( {{ news_R.id }} )</td>
   </tr>
   {% endfor %}
   </table>
