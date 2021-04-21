@@ -15,7 +15,7 @@ import beat
 def setup_periodic_tasks(sender, **kwargs):
     '''print('lol')
     # Calls test() every 100 seconds.
-    sender.add_periodic_task(1000.0, test.s(), name='add-every-10-seconds')'''
+    sender.add_periodic_task(100.0, test.s(), name='add-every-10-seconds')'''
 
 
 @celery_app.task

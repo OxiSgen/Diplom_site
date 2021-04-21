@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
 <h2>Dynamic content</h2>
 
-<p>На данной станице отображается, сколько раз пользователь зашёл на неё:</p>
+<p class="myclass">На данной станице отображается, сколько раз пользователь зашёл на неё:</p>
 
 <p>{{ session }}</p>
 
@@ -13,7 +14,6 @@
 {% load django_charting %}
 
 <body>
-
     <p>{% render_chart chart %}</p>
 </body>
 
