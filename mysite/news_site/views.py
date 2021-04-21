@@ -24,9 +24,7 @@ class News1(generic.ListView):
     def get(self, request):
         num_visits1 = request.session.get('num_visits1', 0)
         request.session['num_visits1'] = num_visits1 + 1
-        news_l = News.objects.filter(news_hype_rate__lte=5)[::2]
-        news_r = News.objects.filter(news_hype_rate__lte=5)[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__lte=5)
         return render(
             request,
             'news_site/news_list.html',
@@ -40,9 +38,7 @@ class News2(generic.ListView):
     def get(self, request):
         num_visits2 = request.session.get('num_visits2', 0)
         request.session['num_visits2'] = num_visits2 + 1
-        news_l = News.objects.filter(news_hype_rate__range=(6, 20))[::2]
-        news_r = News.objects.filter(news_hype_rate__range=(6, 20))[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__range=(6, 20))
         return render(
             request,
             'news_site/news_list.html',
@@ -56,9 +52,7 @@ class News3(generic.ListView):
     def get(self, request):
         num_visits3 = request.session.get('num_visits3', 0)
         request.session['num_visits3'] = num_visits3 + 1
-        news_l = News.objects.filter(news_hype_rate__range=(21, 100))[::2]
-        news_r = News.objects.filter(news_hype_rate__range=(21, 100))[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__range=(21, 100))
         return render(
             request,
             'news_site/news_list.html',
@@ -72,9 +66,7 @@ class News4(generic.ListView):
     def get(self, request):
         num_visits4 = request.session.get('num_visits4', 0)
         request.session['num_visits4'] = num_visits4 + 1
-        news_l = News.objects.filter(news_hype_rate__range=(101, 200))[::2]
-        news_r = News.objects.filter(news_hype_rate__range=(101, 200))[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__range=(101, 200))
         return render(
             request,
             'news_site/news_list.html',
@@ -88,9 +80,7 @@ class News5(generic.ListView):
     def get(self, request):
         num_visits5 = request.session.get('num_visits5', 0)
         request.session['num_visits5'] = num_visits5 + 1
-        news_l = News.objects.filter(news_hype_rate__range=(201, 1000))[::2]
-        news_r = News.objects.filter(news_hype_rate__range=(201, 1000))[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__range=(201, 1000))
         return render(
             request,
             'news_site/news_list.html',
@@ -104,9 +94,7 @@ class News6(generic.ListView):
     def get(self, request):
         num_visits6 = request.session.get('num_visits6', 0)
         request.session['num_visits6'] = num_visits6 + 1
-        news_l = News.objects.filter(news_hype_rate__gt=1000)[::2]
-        news_r = News.objects.filter(news_hype_rate__gt=1000)[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__gt=1000)
         return render(
             request,
             'news_site/news_list.html',
@@ -120,9 +108,7 @@ class News7(generic.ListView):
     def get(self, request):
         num_visits7 = request.session.get('num_visits7', 0)
         request.session['num_visits7'] = num_visits7 + 1
-        news_l = News.objects.filter(news_hype_rate__gt=500)[::2]
-        news_r = News.objects.filter(news_hype_rate__gt=500)[1::2]
-        news_list = zip(news_l, news_r)
+        news_list = News.objects.filter(news_hype_rate__gt=500)
         return render(
             request,
             'news_site/news_list.html',
@@ -141,7 +127,7 @@ class NewsIndividual(generic.TemplateView):
         # self.request.session.flush()
 
         context = {
-                      'chart': DemoChart(queryset=list(self.request.session.items())),
-                      'num_visits': self.request.session.items(),  # num_visits appended
+            'chart': DemoChart(queryset=list(self.request.session.items())),
+            'num_visits': self.request.session.items(),  # num_visits appended
         }
         return context
