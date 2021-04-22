@@ -7,3 +7,22 @@ class NewsIndividual(forms.Form):
     def clean_renewal_date(self):
         data = self.cleaned_data['renewal_date']
         return data'''
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ('username', )
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', )
+

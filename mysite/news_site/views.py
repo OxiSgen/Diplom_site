@@ -9,6 +9,7 @@ import pickle
 
 user_interest = []
 
+
 class News1(generic.ListView):
     """news = Pars()
     for n in news:
@@ -108,6 +109,7 @@ class News7(generic.ListView):
     def get(self, request):
         num_visits7 = request.session.get('num_visits7', 0)
         request.session['num_visits7'] = num_visits7 + 1
+
         news_list = News.objects.filter(news_hype_rate__gt=500)
         return render(
             request,
@@ -124,6 +126,7 @@ class NewsIndividual(generic.TemplateView):
         num_visits8 = self.request.session.get('num_visits8', 0)
         self.request.session['num_visits8'] = num_visits8 + 1
 
+
         # self.request.session.flush()
 
         context = {
@@ -131,3 +134,7 @@ class NewsIndividual(generic.TemplateView):
             'num_visits': self.request.session.items(),  # num_visits appended
         }
         return context
+
+
+class Unregistered(generic.TemplateView):
+    template_name = 'news_site/unregistered.html'
