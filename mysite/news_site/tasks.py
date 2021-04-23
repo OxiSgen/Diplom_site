@@ -1,6 +1,6 @@
 from celery.schedules import crontab
 from celery import Celery
-from .modules.Paeser import main as Pars
+from .modules.rss_parser import main as Pars
 from .models import News, CustomUser
 from celery import shared_task
 from celery.schedules import crontab
@@ -33,11 +33,11 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(100.0, test.s(), name='add-every-10-seconds')
 '''
 
+
 @shared_task(name="test")
 def test():
     print('lol')
-    news = Pars()
+    news = Pars('https://lenta.ru/')
     for n in news:
-        s = News(news_text=n[1], news_url=n[0], news_hype_rate=n[2])
+        s = News(news_text=n[0], news_url=n[1], news_hype_rate=0, pub_date=n[2])
         s.save()
-

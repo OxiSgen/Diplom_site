@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from .models import News
+from django_celery_beat.models import PeriodicTask
 
 from .charts import DemoChart
 
@@ -141,11 +142,12 @@ class NewsIndividual(generic.TemplateView):
         self.request.session.save()
 
         # self.request.session.flush()
-
+        periodic_tasks = list(PeriodicTask.objects.all()[1:])
 
         context = {
             'chart': DemoChart(queryset=list(self.request.session.items())),
             'num_visits': self.request.session.items(),  # num_visits appended
+            'periodic': periodic_tasks,
         }
         return context
 

@@ -5,7 +5,7 @@ import json
 import re
 import urllib.parse as urlparse
 import feedparser
-from Hype_Rate import *
+# from Hype_Rate import *
 
 
 class MyException(BaseException):
@@ -93,16 +93,21 @@ def rss_text(rss_feed):
         # (актуально для сайтов типо Дождя и 3Dnews)
 
 
-def rss_feedparser():
+def rss_feedparser(rss_url):
     # Парсим RSS канал с помощью библиотеки feedparser
-
-    d = feedparser.parse(r'https://3dnews.ru/news/rss/').entries
+    feed = []
+    d = feedparser.parse(rss_url).entries
     for i in d:
+        feed.append([i.title, i.link, i.published])
+        '''
         print(i.title)  # Заголовок
         print(i.link)  # Ссылка
+        print(i.published)  # Дата публикации    
         print(i.tags)  # Теги
         print(i.summary)  # Текст статьи
+        '''
         print('\n')
+    return feed
 
 
 def news_for_parsing_html(url):
@@ -114,10 +119,12 @@ def news_for_parsing_html(url):
     pass
 
 
-if __name__ == '__main__':
-    href = input("Введите url новостного ресурса: ")
-    rss = ''
-    feeds = {}
+def main(url):
+    href = url
+    rss = rss_feeds_urls(href)
+    return rss_feedparser(''.join(rss))
+
+    '''
     try:
         # На дожде под значком RSS скрывается ещё одна страница с выбором лент!!!     +
         # На 3Dnews та же фигня. Нужна дополнительная обработка.                      +
@@ -142,7 +149,12 @@ if __name__ == '__main__':
         for i, r in enumerate(rss):
             feeds[i] = r
         print(feeds, sep='\n')
+        
 
     except MyException:
         print('Затычка для парсинга HTML')
         # news_for_parsing_html(href)
+    '''
+
+
+
