@@ -35,7 +35,7 @@ services:
 
   celery-beat:
     build: ./mysite
-    command: celery -A mysite beat -l info
+    command: celery -A mysite beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
     volumes:
       - ./mysite/:/usr/src/app/
     environment:

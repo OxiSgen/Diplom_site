@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django_celery_beat.models import PeriodicTask
 
 
 # Create your models here.
 
 class CustomUser(AbstractUser):
+    text = models.CharField(max_length=2000, null=True, blank=True)
+    task = models.ManyToManyField(PeriodicTask)
     pass
 
 
