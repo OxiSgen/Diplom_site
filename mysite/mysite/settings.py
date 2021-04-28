@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "django_charting",
+    'django_charting',
     'django_celery_beat',
-
+    'crispy_forms',
 ]
 
 
@@ -147,3 +147,5 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'news_site.CustomUser'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

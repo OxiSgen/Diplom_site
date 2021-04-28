@@ -18,3 +18,10 @@
 .Individual-lenta {
     color: #a41515;
 }
+
+.User-profile-form {
+    border: 1px solid #c6c7cc;
+    margin: 20px;
+    padding: 20px;
+    width: 60%;
+}

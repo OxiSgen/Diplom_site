@@ -1,10 +1,13 @@
+import requests
 from django.shortcuts import render
 from django.views import generic
 
-from .models import News
+from .models import News, UrlsTable, PriorityForUser, CustomUser
 from django_celery_beat.models import PeriodicTask
 
 from .charts import DemoChart
+
+from .forms import UserProfileForm
 
 import pickle
 
@@ -154,4 +157,29 @@ class NewsIndividual(generic.TemplateView):
 
 class Unregistered(generic.TemplateView):
     template_name = 'news_site/unregistered.html'
+
+
+class UserProfile(generic.TemplateView):
+    template_name = 'news_site/profile.html'
+
+    def get_context_data(self, **kwargs):
+        user_urls = PriorityForUser.objects.all().filter(user=self.request.user)
+        if self.request.method == 'POST':
+            if "save" in self.request.POST:
+                pass
+                # form = UserProfileForm(self.request.POST)
+                # form.fields['urls'].queryset = PriorityForUser.objects.all().filter(user=self.request.user)
+        else:
+            form = UserProfileForm(initial={
+                'all_urls': [
+                    url for url in user_urls.values_list("url", flat=True)
+                ]
+            })
+
+        context = {
+            'user_urls': user_urls,
+            'urls': UrlsTable.objects.all(),
+            'form': form,
+        }
+        return context
 

@@ -1,7 +1,10 @@
 {% load static %}
+<html lang="en">
 
 
 <head class="p-3 mb-3 border-bottom">
+  <meta charset="UTF-8">
+  <title>Title</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -46,12 +49,12 @@
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
           {% if user.is_authenticated %}
-            <li><a class="dropdown-item" href="#">{{ user.get_username }}</a></li>
+            <li><a class="dropdown-item" href="{% url 'Profile' %}">{{ user.get_username }}</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">placeholder</a></li>
             <li><a class="dropdown-item" href="#">placeholder</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout'%}?next={% url 'News1' %}">Logout</a></li>
           {% else %}
             <li><a class="dropdown-item" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
           {% endif %}

@@ -12,4 +12,5 @@ urlpatterns = [
     path('news7/', views.News7.as_view(), name='News7'),
     path('newsIndividual/', views.NewsIndividual.as_view(), name='NewsIndividual'),
     path('unregistered/', views.Unregistered.as_view(), name='Not_logged'),
+    path('profile/', views.UserProfile.as_view(), name='Profile'),
 ]

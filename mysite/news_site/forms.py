@@ -10,7 +10,7 @@ class NewsIndividual(forms.Form):
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, PriorityForUser, UrlsTable
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -26,3 +26,11 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = ('username', )
 
+
+class UserProfileForm(forms.Form):
+    all_urls = forms.ModelMultipleChoiceField(
+        queryset=UrlsTable.objects.all().order_by('url'),
+        widget=forms.CheckboxSelectMultiple,
+        label="",
+        label_suffix='',
+    )
