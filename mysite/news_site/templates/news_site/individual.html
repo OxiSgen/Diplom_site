@@ -5,9 +5,13 @@
 
 <h2>Dynamic content</h2>
 
-<p class="myclass">На данной станице отображается, сколько раз пользователь зашёл на неё:</p>
+<p class="myclass">На данной станице отображается, сколько раз пользователь {{ user.get_username }} зашёл на неё: </p>
 
-<p>{{ session }}</p>
+
+{% for PeriodicTask in periodic %}
+    <p> {{ PeriodicTask.name }}  </p>
+{% endfor %}
+
 
 <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time {% else %} times{% endif %}.</p>
 
